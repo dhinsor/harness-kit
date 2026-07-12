@@ -10,6 +10,8 @@ Either way, `/seedling` reads everything present and writes the CLAUDE.md that t
 
 ## Process
 
+**Language:** Conduct all interaction and write your report in the language the user is working in (check their recent messages / global config) — don't default to English just because this file is in English. (The CLAUDE.md content itself follows the project's own convention.)
+
 ### 1. Scan the whole project
 
 Don't assume it's docs-only or code-only — look for both.

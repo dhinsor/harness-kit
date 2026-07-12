@@ -1,8 +1,10 @@
-Start a brand-new project in `~/Projects/`, tailored by a short interview. It adapts the CLAUDE.md seed and the amount of dependencies/rules to how serious the project actually is — from a throwaway playground to a production-grade codebase. This is the single entry point for spinning up a new project.
+Start a brand-new project **in the current working directory**, tailored by a short interview. It adapts the CLAUDE.md seed and the amount of dependencies/rules to how serious the project actually is — from a throwaway playground to a production-grade codebase. This is the single entry point for spinning up a new project.
 
 Keep the CLAUDE.md a **seed**, not a full document — `/seedling` grows it later (before the first execution phase). Seed heavier only where the seriousness level below asks for it.
 
 ## Interview (do this first, before touching the filesystem)
+
+**Language:** Run the entire interview — and every message to the user — in the language they're working in (check their recent messages / their global CLAUDE.md config). Don't default to English just because this command file is written in English.
 
 If the user already gave the project name and/or description when calling the command, don't ask those again.
 
@@ -22,7 +24,7 @@ If the user already gave the project name and/or description when calling the co
 
 ## Build the project (after the interview)
 
-5. Create the folder `~/Projects/{name}/`.
+5. Create the folder `{name}/` **in the current working directory** — wherever the user invoked the command (e.g. from their home dir → `~/{name}/`). Don't hard-code a `~/Projects/` path; if they want it somewhere specific, they can `cd` there before running this.
 
 6. `git init`.
 
@@ -41,7 +43,11 @@ If the user already gave the project name and/or description when calling the co
 
 11. `git add` + first commit (e.g. `chore: initial project seed`).
 
-12. **Offer** to push to GitHub — don't do it automatically. If the user says yes, use `gh repo create {name} --source=. --private --push` (default to private; ask public vs private if unsure). If `gh` isn't authenticated, tell them and stop there.
+12. **Offer to push to GitHub — ask with `AskUserQuestion`** (single select, three fixed options); don't push automatically:
+    - **Not now** — leave it local, the user can push later.
+    - **Push (private)** — run `gh repo create {name} --source=. --private --push`.
+    - **Push (public)** — run `gh repo create {name} --source=. --public --push`.
+    If `gh` isn't authenticated, tell them and stop there.
 
 ## CLAUDE.md seed template
 
