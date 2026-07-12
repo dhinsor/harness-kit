@@ -43,14 +43,23 @@ Write it following the template (the user's, or the standard one below), then sa
 
 **Do NOT** publish it to an issue tracker at this step — breaking it into tickets is the job of `/to-tickets`, which happens after research / document adjustments are done.
 
-### 5.5 (Only for a real team repo) Offer to sync to a Linear Project Document
+### 5.5 Ask whether to sync to a tracker (ask every time)
 
-If the project is a real team repo (a shared team project) and a Linear MCP is connected, **offer** (don't do it automatically) to copy the document contents up as a **Linear Project Document** of the relevant project, so the team can read it in Linear.
+After saving the local file, **always ask** the user — with `AskUserQuestion` — whether to mirror this document up to their issue tracker as a **Project Document** (Linear is the default tracker). Ask **every time**; never decide for them or silently skip because the project "looks like" a personal playground rather than a team repo. Offer two options:
+
+- **Sync to Linear** (recommended for team work) — copy the document up as a Linear Project Document of the relevant project, so the team can read it in Linear.
+- **Keep local only** — the file in the repo is enough for now.
+
+Then act on the answer:
+
+- **Sync chosen + a Linear MCP is connected** → create/update the Linear Project Document in the relevant project, and add a `Tracker: Linear (project: <project-name>)` marker line near the top of the local file (update it if one is already there). `/to-tickets` reads this line to route its tickets to that same Linear project without asking again.
+- **Sync chosen but no Linear (tracker) MCP is connected** → tell the user the tracker isn't connected, so it can't mirror right now; the local file stays the source of truth, and they can connect the MCP and re-run this step later. Don't add the marker.
+- **Keep local only** → skip the mirror and don't add the marker (`/to-tickets` will simply ask later).
+
+Invariants:
 
 - **The local file is always the source of truth** — the Linear Document is only a **mirror** for people to read. `/implement` still reads from the file during execution (faster than fetching through the MCP). Whenever the document changes, re-copy over the Linear mirror.
 - This is a **Project Document, NOT an issue/ticket** — so it doesn't conflict with the "don't publish tickets" rule above (breaking into tickets is still `/to-tickets`'s job).
-- **Leave a marker in the local file** so downstream routing is automatic: add a `Tracker: Linear (project: <project-name>)` line near the top of the document (update it if one is already there). `/to-tickets` reads this line to route its tickets to that same Linear project without asking again. If you don't mirror to Linear, don't add the line — `/to-tickets` will simply ask.
-- No Linear MCP, or the user declines the mirror → **skip this step**, don't add the marker.
 
 ### 6. Close: point to the next step
 
