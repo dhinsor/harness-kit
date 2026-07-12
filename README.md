@@ -33,6 +33,35 @@ cd harness-kit
 
 ---
 
+## ภาพรวม: 2 command ต่อกับ flow ยังไง
+
+`/new-seed` เปิดหัว · `/seedling` คั่นกลางก่อนลงมือเขียนโค้ด — วางตำแหน่งในชีวิตของงาน 1 phase แบบนี้:
+
+```
+[ ขึ้นโปรเจกต์ ]
+   /new-seed   → โฟลเดอร์ + git + deps + CLAUDE.md seed (ระดับความจริงจัง 4 ระดับ)
+        │
+        ▼
+[ วางแผน · Greenfield ]
+   (wayfinder ถ้างานใหญ่เกิน session เดียว)
+   grill  →  to-spec  →  research  →  to-tickets
+   └─ prototype = optional ตอนถกดีไซน์ ─┘        │
+                                                 │
+        ┌────────────────────────────────────────┘
+        │   ← จุดนี้: มี issues แล้ว แต่ยังไม่เขียนโค้ดบรรทัดแรก
+        ▼
+[ เตรียม execute ]
+   /seedling   → สแกน docs+code เขียน CLAUDE.md ให้ agent ลงมือ phase แรกได้เต็มที่
+        │
+        ▼
+[ ลงมือ + ปิดงาน ]
+   implement (+tdd)  →  spec-review  →  sync-docs  →  ปิด phase
+```
+
+> **Brownfield ก็ใช้ `/seedling`** — ถ้าเป็น playground ที่โตแล้ว/โค้ดเดิมที่รก ให้เริ่มด้วย `/seedling` สแกนทั้งโปรเจกต์เพื่อวาง CLAUDE.md ก่อน แล้วค่อยเข้า flow สะสาง (ดูหัวข้อ Brownfield ด้านล่าง)
+
+---
+
 ## Greenfield — ชุดสร้างของใหม่
 
 ใช้ตอนเริ่มจากศูนย์หรือทำฟีเจอร์ใหม่ ลำดับ flow: **Grill → Spec → Plan → Tickets → Execute → Review → Update**
