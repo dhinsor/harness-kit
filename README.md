@@ -37,25 +37,35 @@ cd harness-kit
 
 `/new-seed` เปิดหัว · `/seedling` คั่นกลางก่อนลงมือเขียนโค้ด — วางตำแหน่งในชีวิตของงาน 1 phase แบบนี้:
 
-```
-[ ขึ้นโปรเจกต์ ]
-   /new-seed   → โฟลเดอร์ + git + deps + CLAUDE.md seed (ระดับความจริงจัง 4 ระดับ)
-        │
-        ▼
-[ วางแผน · Greenfield ]
-   (wayfinder ถ้างานใหญ่เกิน session เดียว)
-   grill  →  to-spec  →  research  →  to-tickets
-   └─ prototype = optional ตอนถกดีไซน์ ─┘        │
-                                                 │
-        ┌────────────────────────────────────────┘
-        │   ← จุดนี้: มี issues แล้ว แต่ยังไม่เขียนโค้ดบรรทัดแรก
-        ▼
-[ เตรียม execute ]
-   /seedling   → สแกน docs+code เขียน CLAUDE.md ให้ agent ลงมือ phase แรกได้เต็มที่
-        │
-        ▼
-[ ลงมือ + ปิดงาน ]
-   implement (+tdd)  →  spec-review  →  sync-docs  →  ปิด phase
+```mermaid
+flowchart TD
+    NS["/new-seed · ขึ้นโปรเจกต์ใหม่<br/>โฟลเดอร์ + git + deps + CLAUDE.md seed"]
+
+    subgraph GF ["Greenfield · วางแผน"]
+      direction TB
+      WF["wayfinder<br/>(งานใหญ่เกิน session เดียว)"] --> GR["grill"]
+      GR --> TS["to-spec"]
+      TS --> RS["research"]
+      RS --> TT["to-tickets"]
+      PT["prototype (optional)"] -.-> TS
+    end
+
+    subgraph EX ["ลงมือ + ปิดงาน"]
+      direction TB
+      IM["implement (+tdd)"] --> SR["spec-review"]
+      SR --> SY["sync-docs"]
+    end
+
+    SD["/seedling · เตรียม execute<br/>สแกน docs + code เขียน CLAUDE.md ให้พร้อม"]
+
+    NS --> WF
+    TT -->|"มี issues แล้ว แต่ยังไม่เขียนโค้ดบรรทัดแรก"| SD
+    SD --> IM
+    SY --> DONE(["ปิด phase"])
+    BF["Brownfield<br/>(playground โต / โค้ดรก)"] -.->|"เริ่มด้วย /seedling ก่อน"| SD
+
+    classDef cmd fill:#2ea043,stroke:#1a7f37,color:#ffffff;
+    class NS,SD cmd;
 ```
 
 > **Brownfield ก็ใช้ `/seedling`** — ถ้าเป็น playground ที่โตแล้ว/โค้ดเดิมที่รก ให้เริ่มด้วย `/seedling` สแกนทั้งโปรเจกต์เพื่อวาง CLAUDE.md ก่อน แล้วค่อยเข้า flow สะสาง (ดูหัวข้อ Brownfield ด้านล่าง)
