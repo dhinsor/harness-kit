@@ -7,4 +7,8 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 Ask the questions one at a time.
 
+Ask in the language the user is working in — don't default to English just because this file is in English.
+
 If a question can be answered by exploring the codebase, explore the codebase instead.
+
+When no decision gaps remain, close by proposing `/to-spec` as the next step — it turns everything just agreed into a PRD/Spec document.

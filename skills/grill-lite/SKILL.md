@@ -7,6 +7,8 @@ description: Interview the user about a plan or design until reaching shared und
 
 Same goal as `/grill-me` — close every gap in understanding before you build, working through each branch of the decision tree until nothing is left open. The difference is **how you ask**: use faster UI when a question has a limited set of answers, instead of making the user type out every reply.
 
+**Language:** run the interview — every question, option label, and message — in the language the user is working in; don't default to English just because this file is in English.
+
 ## Before asking anything
 
 If an answer can be found by exploring the codebase or existing files, go look it up yourself. Never ask about a **fact** you can verify on your own. Ask only about **decisions** that genuinely require the user to make a call.
@@ -27,6 +29,8 @@ An answered open question may spawn new closed questions (e.g. after a narrative
 ## When to stop
 
 Stop asking once no decision gaps remain. Don't start executing the plan until you reach that point.
+
+Then close by proposing `/to-spec` as the next step — it turns everything just agreed into a PRD/Spec document.
 
 ## When to use another grill variant instead
 
