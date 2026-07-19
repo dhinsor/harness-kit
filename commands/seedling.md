@@ -36,7 +36,7 @@ The rule that governs what goes in: **CLAUDE.md holds standing rules, how to run
 - **Domain vocabulary** — the project's terms, pulled from `CONTEXT.md` if present, so titles and code use the right words.
 - **Conventions & standards** — the coding standards this project commits to (from docs, or observed in existing code).
 - **Testing approach** — the test seam and what makes a good test here, from the spec's testing decisions. Skip if this is a playground with no tests.
-- **Where things live** — pointers to the full spec/PRD, research, and `issues/`, so the executing agent knows where to read the complete detail. Include the `Tracker:` marker here if there was one.
+- **Where things live** — pointers to the full spec/PRD, research, and `issues/`, so the executing agent knows where to read the complete detail. Include the `Tracker:` marker here if there was one. Also state the standing convention: new project docs — specs, PRDs, research notes, ADRs — go under `docs/` (a CONTEXT.md glossary stays at the repo root), so files keep landing in one predictable place.
 - **Open questions / gotchas** — anything the docs left unresolved that the executor should watch for.
 
 ### 3. Tidy the project hygiene (only if missing)

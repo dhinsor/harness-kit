@@ -37,8 +37,7 @@ Vibe-code / playground work that won't have tests → skip this step.
 
 Write it following the template (the user's, or the standard one below), then save:
 
-- In a project that is a git repo → `docs/prd-<feature-name>.md` or `docs/spec-<feature-name>.md`, depending on what you chose in step 1 (create the `docs` folder if it doesn't exist).
-- A small playground → `PRD.md` or `SPEC.md` at the root.
+- In a project folder (playground included) → `docs/prd-<feature-name>.md` or `docs/spec-<feature-name>.md`, depending on what you chose in step 1 (create the `docs` folder if it doesn't exist). One predictable location for every project — don't invent per-project exceptions.
 - No clear project folder yet → show it in the chat to copy out, and ask where they'd like it saved.
 
 **Do NOT** publish it to an issue tracker at this step — breaking it into tickets is the job of `/to-tickets`, which happens after research / document adjustments are done.

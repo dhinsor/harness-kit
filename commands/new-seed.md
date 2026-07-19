@@ -56,6 +56,7 @@ Keep it short and readable — a seed Claude can absorb in one pass. Always incl
 - **# {Project name}** + the one-to-two-sentence description (and feature list if given).
 - **## Stack** — language, framework, key deps chosen.
 - **## Running it** — the real run/build/test command if known yet; otherwise write `TBD — no code yet`.
+- **## Docs** — one standing line at every seriousness level: `Project docs — specs, PRDs, research notes, ADRs — live under docs/.` (A CONTEXT.md glossary, if the project grows one, stays at the repo root.) This keeps files landing in one predictable place even in sessions that don't go through the flow skills.
 - **## Development rules** — scaled by seriousness (see below).
 - **## Notes** — the seriousness tag + anything still open.
 
