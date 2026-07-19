@@ -10,13 +10,15 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
+**Language:** report everything to the user in the language they're working in — and pass that language instruction into both sub-agent briefs, so their reports come back already written in it.
+
 This is a different check from the built-in `/code-review` (which hunts bugs and suggests simplifications). Reach for `/spec-review` when you want to confirm a ticket was actually built as specified and the code fits repo conventions — reach for `/code-review` when you want a general correctness/quality pass.
 
 ## Process
 
 ### 1. Pin the fixed point
 
-Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. If they didn't specify one, ask for it.
+Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. If they didn't specify one, guess it from the merge-base with the default branch (`git merge-base main HEAD`, adjusting for the repo's actual default branch), then **confirm briefly with the user** that this is the range they mean — same as `/sync-docs` does.
 
 Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
 
