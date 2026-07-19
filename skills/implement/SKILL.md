@@ -23,3 +23,11 @@ Run typechecking regularly, single test files regularly, and the full test suite
 Commit your work to the current branch.
 
 Do not run /code-review or /spec-review as part of this skill — review is a separate, deliberate step the user runs afterward.
+
+## Parallel tickets (only when the user asks)
+
+Default is one ticket at a time. When the user asks to run several tickets in parallel:
+
+1. **Pick safe pairs, not just unblocked ones.** Blocking edges say the logic is independent — not that the code is. Take frontier tickets and check them against the codebase: if two would touch the same files or area (a shared schema, router, navigation), run those sequentially instead and say why.
+2. **One subagent per ticket, each in its own git worktree** (worktree isolation), so they can't step on each other's files. Each subagent follows this skill's rules for its own ticket — status updates, the testing lanes above, impeccable for UI work — and commits to its own branch.
+3. **Merge back one branch at a time** when they finish, running the full test suite after each merge — the merge point is where parallel work gets verified together.
