@@ -31,6 +31,8 @@ cd harness-kit
 
 **CLAUDE.md ทั้งสองตัวยึดหลักเดียวกัน:** เก็บ *กฎยืน + วิธี run + ชี้ทางไป docs* เท่านั้น — ไม่ก็อป spec/PRD ยัดลงไป (นั่นทำให้มันบวมและล้าสมัยเร็ว)
 
+**ตำแหน่งเอกสารคงที่:** ไฟล์ที่ flow สร้าง (spec/PRD, research notes, ADR) ลง `docs/` เสมอ ไม่ว่าโปรเจกต์จะเล็กแค่ไหน — ยกเว้น `CONTEXT.md` (glossary ศัพท์โดเมน) ที่อยู่ root โดยเจตนา เพราะถูกอ่านแทบทุก session เหมือน CLAUDE.md · กติกานี้ถูกฝังเป็น standing rule ลง CLAUDE.md seed ของทั้งสอง command ด้วย เพื่อคุมแม้กระทั่ง session ที่สร้างไฟล์โดยไม่ผ่าน skill
+
 ---
 
 ## ภาพรวม: 2 command ต่อกับ flow ยังไง
@@ -79,12 +81,12 @@ flowchart TD
 | stage | skill | หน้าที่ |
 |---|---|---|
 | (ก่อน flow) | `wayfinder` | งานใหญ่เกิน 1 session → ทำแผนที่ investigation แตกเป็น ticket ที่เป็น *คำถาม* ไม่ใช่ฟีเจอร์ |
-| Grill | `grill-lite` / `grill-me` / `grill-with-docs` | สัมภาษณ์จนเข้าใจตรงกันก่อนสร้าง (lite = แตะเลือก, me = พิมพ์ล้วน, with-docs = จด CONTEXT.md/ADR ไปด้วย) |
+| Grill | `grill-lite` / `grill-me` / `grill-with-docs` | สัมภาษณ์จนเข้าใจตรงกันก่อนสร้าง (lite = แตะเลือก, me = พิมพ์ล้วน, with-docs = จด CONTEXT.md/ADR ไปด้วย) · ปิด gap ครบแล้วเสนอ `/to-spec` ต่อให้เอง |
 | Prototype | `prototype` | ทำ throwaway prototype ตอบคำถามดีไซน์ (state model / UI น่าจะหน้าตายังไง) — optional |
 | Spec | `to-spec` | สังเคราะห์บทสนทนาเป็น PRD/Spec (ไฟล์ local) |
 | Plan | `research` | หา primary source เช็คว่า stack ใหม่กว่า knowledge cutoff ไหม |
 | Tickets | `to-tickets` | หั่นเป็น vertical slice แต่ละใบมี blocking edges |
-| Execute | `implement` (+ `tdd`) | ออกจาก plan เข้า auto — ขับ TDD, typecheck/test/commit ทีละ ticket · งาน UX/UI จะเรียก `impeccable` มายกระดับคุณภาพให้ (ดูหมายเหตุท้ายไฟล์) |
+| Execute | `implement` (+ `tdd`) | ออกจาก plan เข้า auto — เช็คก่อนว่า ticket ไม่ติด blocker แล้วอัปเดตสถานะบน tracker ให้ (In Progress → Done) · ขับ TDD ตามเนื้องาน ไม่เหมารวม (logic ที่คนพึ่งพา = เต็มรูป / UI แสดงผล = ไม่ต้องมี test ของตัวเอง / playground = ข้าม) · typecheck/test/commit ทีละ ticket · ขอทำหลาย ticket ขนานกันได้ (subagent คนละ git worktree) · งาน UX/UI จะเรียก `impeccable` มายกระดับคุณภาพให้ (ดูหมายเหตุท้ายไฟล์) |
 | Review | `spec-review` | เทียบโค้ดกับ Standards + Spec (คู่กับ `/code-review` built-in ที่ล่าบั๊ก) |
 | Update | `sync-docs` | ปิดงาน — sync เอกสาร (CLAUDE.md/README/CONTEXT) ให้ตรงโค้ดที่ ship แล้ว push/PR |
 
@@ -97,7 +99,7 @@ flowchart TD
 | skill | ทำอะไร |
 |---|---|
 | `improve-codebase-architecture` | สแกน codebase หาจุดที่ควรปรับ → รายงาน HTML → grill จุดที่เลือก (ประตูทางเข้า) |
-| `domain-modeling` | กู้ "ภาษาโดเมน" ที่โค้ดรกไม่มี → เขียน CONTEXT.md + ADR |
+| `domain-modeling` | กู้ "ภาษาโดเมน" ที่โค้ดรกไม่มี → เขียน CONTEXT.md + ADR · เป็นเจ้าของ format ทั้งสองไฟล์แต่เพียงผู้เดียว (`grill-with-docs` เรียกใช้ตัวนี้แทนการก๊อปเนื้อหาไปซ้ำ) |
 | `codebase-design` | คลังศัพท์ "deep module" — ตัดสินว่า seam อยู่ตรงไหน interface สะอาดยังไง |
 
 Brownfield ยืม skill จาก Greenfield มาต่อได้ ลำดับที่แนะนำ:
